@@ -1,0 +1,31 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pen Detection</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <h1>Pen Detection System</h1>
+
+    <div>
+        <input type="file" id="imageUpload">
+        <button id="uploadButton">Upload Image</button>
+        <p id="uploadStatus"></p>
+    </div>
+
+    <div>
+        <button id="trainButton">Train Model</button>
+        <p id="trainStatus"></p>
+    </div>
+
+    <div>
+        <button id="detectButton">Start Real-time Detection</button>
+        <p id="detectStatus"></p>
+    </div>
+
+    <script src="static/script.js"></script>
+</body>
+</html>
