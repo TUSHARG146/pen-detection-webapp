@@ -30,12 +30,16 @@ def detect_pen_live():
 
         # Make a prediction
         prediction = model.predict(img_input)
+        confidence = prediction[0][1]  # Confidence of the pen class
         class_index = np.argmax(prediction)
 
-        # Draw bounding box and label if a pen is detected
-        if class_index == 1:
+        # Set a confidence threshold to reduce false positives
+        confidence_threshold = 0.8
+
+        # Draw bounding box and label if a pen is detected with high confidence
+        if class_index == 1 and confidence >= confidence_threshold:
             cv2.rectangle(frame, (10, 10), (frame.shape[1] - 10, frame.shape[0] - 10), (0, 255, 0), 2)
-            cv2.putText(frame, "Pen Detected", (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+            cv2.putText(frame, f"Pen Detected: {confidence:.2f}", (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
         else:
             cv2.putText(frame, "No Pen Detected", (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
 

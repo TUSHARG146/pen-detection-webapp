@@ -5,6 +5,7 @@ import os
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 from werkzeug.utils import secure_filename
 from train import train_model
+from datacollection import collect_data
 
 app = Flask(__name__)
 
@@ -42,6 +43,11 @@ def train():
 def detect():
     detect_pen_live()  # Start live detection using webcam
     return jsonify({"success": True, "message": "Real-time detection started."})
+
+@app.route('/collect', methods=['POST'])
+def collect():
+    collect_data()  # Collect data for training
+    return jsonify({"success": True, "message": "Data collection started."})
 
 if __name__ == '__main__':
     app.run(debug=True)
